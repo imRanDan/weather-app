@@ -2,6 +2,7 @@ import React from 'react'
 import { FaMoon } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdMyLocation } from "react-icons/md";
+import SearchBox from './SearchBox';
 
 type Props = {}
 
@@ -20,7 +21,7 @@ export default function Navbar({}: Props) {
                 <p className="text-slate-900/80 text-sm"> Hamilton </p>
 
                 <div>
-                    {/* SearchBox */}
+                    <SearchBox/>
                 </div>
             </section>
         </div>
