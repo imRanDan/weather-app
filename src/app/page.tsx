@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { useQuery } from "react-query";
+import NEXT_PUBLIC_WEATHER_KEY from '.env.local'
 
 interface WeatherDetail {
   dt: number;
@@ -60,7 +61,7 @@ interface WeatherData {
 }
 
 
-// https://api.openweathermap.org/data/2.5/forecast?q=toronto&appid=de1e9c9e3c3ed5f7e4f954f578362542&cnt=56
+// https://api.openweathermap.org/data/2.5/forecast?q=toronto&appid=NEXT_PUBLIC_WEATHER_KEY&cnt=56
 export default function Home() {
   const { isPending, error, data } = useQuery({
     queryKey: ['repoData'],
