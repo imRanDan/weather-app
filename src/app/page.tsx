@@ -56,22 +56,21 @@ interface WeatherData {
   population: number;
   timezone: number;
   sunrise: number;
-  sunset: number;
+  sunset: number;  
   };
 }
 
 
 // https://api.openweathermap.org/data/2.5/forecast?q=toronto&appid=NEXT_PUBLIC_WEATHER_KEY&cnt=56
 export default function Home() {
-  const { isPending, error, data } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
-      fetch('https://api.github.com/repos/TanStack/query').then((res) =>
-        res.json(),
-      ),
+      fetch('https://api.openweathermap.org/data/2.5/forecast?q=toronto&appid=27e19f6fd534a77deb2222f11b2db7b321&cnt=56'
+      ).then((res) => res.json())
   });
 
-  if (isPending) return 'Loading...'
+  if (isLoading) return 'Loading...'
 
   return (
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
