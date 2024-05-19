@@ -3,7 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { useQuery } from "react-query";
-import NEXT_PUBLIC_WEATHER_KEY from '.env.local'
+import axios from "axios";
 
 interface WeatherDetail {
   dt: number;
@@ -63,12 +63,18 @@ interface WeatherData {
 
 // https://api.openweathermap.org/data/2.5/forecast?q=toronto&appid=NEXT_PUBLIC_WEATHER_KEY&cnt=56
 export default function Home() {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['repoData'],
-    queryFn: () =>
-      fetch('https://api.openweathermap.org/data/2.5/forecast?q=toronto&appid=27e19f6fd534a77deb2222f11b2db7b321&cnt=56'
-      ).then((res) => res.json())
-  });
+  const { isLoading, error, data } = useQuery<WeatherData>(
+    "repoData",
+    async () => {
+      const { data } = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=toronto&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
+      );
+      return data;
+    }
+
+  );
+
+  console.log('data')
 
   if (isLoading) return 'Loading...'
 
